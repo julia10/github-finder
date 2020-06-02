@@ -1,26 +1,26 @@
-$(document).ready(function(){
-    $("#searchUser").on("keyup", function(e){
+$(document).ready(function () {
+    $("#searchUser").on("keyup", function (e) {
         let username = e.target.value;
-
+        console.log({ username });
         //Make request to GitHub
         $.ajax({
-            url : "https://api.github.com/users/" + username,
-            data : {
-                client_id:"b1e193804bb0746a1d70",
-                client_secret:"120ee38c313eec6225c68e7723b36cb409178ba2"
+            url: "https://api.github.com/users/" + username,
+            data: {
+                client_id: "b1e193804bb0746a1d70",
+                client_secret: "120ee38c313eec6225c68e7723b36cb409178ba2"
             }
-        }).done(function(user){
+        }).done(function (user) {
             $.ajax({
-                url : "https://api.github.com/users/" + username + "/repos",
-                data : {
-                    client_id:"b1e193804bb0746a1d70",
-                    client_secret:"120ee38c313eec6225c68e7723b36cb409178ba2",
+                url: "https://api.github.com/users/" + username + "/repos",
+                data: {
+                    client_id: "b1e193804bb0746a1d70",
+                    client_secret: "120ee38c313eec6225c68e7723b36cb409178ba2",
                     sort: "created: asc",
                     per_page: 7
                 }
-            }).done(function(repos){
+            }).done(function (repos) {
                 //console.log(repos);
-                $.each(repos, function(index, value){
+                $.each(repos, function (index, value) {
                     $("#repos").append(`
                         <div class="well">
                             <div class="row">
